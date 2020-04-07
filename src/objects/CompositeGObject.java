@@ -60,7 +60,7 @@ public class CompositeGObject extends GObject {
 
 	@Override
 	public void paintLabel(Graphics g) {
-		g.drawString("Group", x, y);
+		g.drawString("Group", x, y + height + 10);
 	}
 	
 }

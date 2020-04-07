@@ -28,6 +28,8 @@ public abstract class GObject {
 		}
 		return false;
 	}
+
+	public boolean getSelected() { return this.selected; }
 	
 	public void selected() {
 		this.selected = true;

@@ -29,16 +29,17 @@ public class DrawingBoard extends JPanel {
 	
 	public void groupAll() {
 		CompositeGObject cgObject = new CompositeGObject();
-		for(target : gObjects){
-			cgObjects.add(target);
+		for(GObject target : gObjects){
+			cgObject.add(target);
 		}
 		gObjects.clear();
 		gObjects.add(cgObject);
 	}
 
 	public void deleteSelected() {
-		for(target : gObjects){
-			if(target.selected) gObjects.remove(target);
+		for (GObject target : gObjects) {
+			if (target.getSelected()) gObjects.remove(target);
+			break;
 		}
 	}
 	
@@ -80,16 +81,23 @@ public class DrawingBoard extends JPanel {
 	class MAdapter extends MouseAdapter {
 
 		// TODO: You need some variables here
+		public GObject selectedObj;
 		
 		private void deselectAll() {
-			// TODO: Implement this method.
+			for (GObject target : gObjects){
+				target.deselected();
+			}
 		}
 		
 		@Override
 		public void mousePressed(MouseEvent e) {
-			for (target : gObjects){
-				if target.pointerHit(e.getX(), e,getY()) { target.selected() };
+			deselectAll();
+			for (GObject target : gObjects){
+				if (target.pointerHit(e.getX(), e.getY())) {
+					selectedObj = target;
+				}
 			}
+			selectedObj.selected();
 		}
 
 		@Override
