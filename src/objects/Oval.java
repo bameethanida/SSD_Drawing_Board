@@ -20,7 +20,7 @@ public class Oval extends GObject {
 	
 	@Override
 	public void paintLabel(Graphics g) {
-		g.drawString("Oval", x, y + height + 10);
+		g.drawString("Oval", x, y + height + 15);
 	}
 	
 }

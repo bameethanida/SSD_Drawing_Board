@@ -25,6 +25,7 @@ public class DrawingBoard extends JPanel {
 	
 	public void addGObject(GObject gObject) {
 		gObjects.add(gObject);
+		repaint();
 	}
 	
 	public void groupAll() {
@@ -34,14 +35,17 @@ public class DrawingBoard extends JPanel {
 		}
 		gObjects.clear();
 		gObjects.add(cgObject);
+		repaint();
 	}
 
 	public void deleteSelected() {
 		if (target != null) gObjects.remove(target);
+		repaint();
 	}
 	
 	public void clear() {
 		gObjects.clear();
+		repaint();
 	}
 	
 	@Override
@@ -85,6 +89,7 @@ public class DrawingBoard extends JPanel {
 				obj.deselected();
 				target = null;
 			}
+			repaint();
 		}
 		
 		@Override
@@ -98,18 +103,17 @@ public class DrawingBoard extends JPanel {
 					target.selected();
 				}
 			}
+			repaint();
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			try {
+			if (target != null) {
 				target.move(e.getX() - mouseX, e.getY() - mouseY);
 				mouseX = e.getX();
 				mouseY = e.getY();
 			}
-			catch (Exception ignored) {
-				;
-			}
+			repaint();
 		}
 	}
 	
