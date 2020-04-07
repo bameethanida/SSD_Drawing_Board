@@ -77,7 +77,8 @@ public class DrawingBoard extends JPanel {
 
 	class MAdapter extends MouseAdapter {
 
-		// TODO: You need some variables here
+		public int mouseX = 0;
+		public int mouseY = 0;
 		
 		private void deselectAll() {
 			for (GObject obj : gObjects){
@@ -89,8 +90,10 @@ public class DrawingBoard extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			deselectAll();
+			mouseX = e.getX();
+			mouseY = e.getY();
 			for (GObject obj : gObjects){
-				if (obj.pointerHit(e.getX(), e.getY())) {
+				if (obj.pointerHit(mouseX, mouseY)) {
 					target = obj;
 					target.selected();
 				}
@@ -99,7 +102,9 @@ public class DrawingBoard extends JPanel {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			// TODO: Implement this method.
+			target.move(e.getX() - mouseX, e.getY() - mouseY);
+			mouseX = e.getX();
+			mouseY = e.getY();
 		}
 	}
 	
